@@ -54,8 +54,8 @@ class RetrofitWordRepository : WordRepository {
 
     private fun convertWords(apiWords: List<com.github.aleksandrgrebenkin.androidlevel3.data.web.entity.Word>): List<Word> {
         val result = mutableListOf<Word>()
-        val meanings = mutableListOf<Meaning>()
         for (apiWord in apiWords) {
+            val meanings = mutableListOf<Meaning>()
             apiWord.meanings?.let { apiMeanings ->
                 for (apiMeaning in apiMeanings) {
                     apiMeaning.translation?.let { apiTranslation ->
