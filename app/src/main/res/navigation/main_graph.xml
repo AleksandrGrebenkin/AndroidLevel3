@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/searchFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.github.aleksandrgrebenkin.androidlevel3.presentation.view.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_meaningFragment"
+            app:destination="@id/meaningFragment"
+            app:popUpTo="@id/searchFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:popUpTo="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/meaningFragment"
+        android:name="com.github.aleksandrgrebenkin.androidlevel3.presentation.view.meaning.MeaningFragment"
+        android:label="fragment_meaning"
+        tools:layout="@layout/fragment_meaning" >
+        <argument
+            android:name="word"
+            app:argType="com.github.aleksandrgrebenkin.androidlevel3.domain.entity.Word" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.github.aleksandrgrebenkin.androidlevel3.presentation.view.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_meaningFragment"
+            app:destination="@id/meaningFragment"
+            app:popUpTo="@id/historyFragment" />
+    </fragment>
+</navigation>
