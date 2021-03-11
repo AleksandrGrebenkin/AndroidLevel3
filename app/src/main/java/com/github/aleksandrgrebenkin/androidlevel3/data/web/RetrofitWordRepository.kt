@@ -58,7 +58,9 @@ class RetrofitWordRepository : WordRepository {
                         meanings.add(
                             Meaning(
                                 apiTranslation.text ?: "",
-                                apiMeaning.partOfSpeechCode ?: ""
+                                apiMeaning.partOfSpeechCode ?: "",
+                                apiMeaning.imageUrl?.let { "https:$it" } ?: "",
+                                apiMeaning.previewUrl?.let { "https:$it" } ?: ""
                             )
                         )
                     }

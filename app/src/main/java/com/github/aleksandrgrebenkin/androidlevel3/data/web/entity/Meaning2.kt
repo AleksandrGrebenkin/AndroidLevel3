@@ -4,5 +4,7 @@ import com.google.gson.annotations.Expose
 
 data class Meaning2(
     @Expose val partOfSpeechCode: String?,
-    @Expose val translation: Translation?
+    @Expose val translation: Translation?,
+    @Expose val imageUrl: String?,
+    @Expose val previewUrl: String?
 )

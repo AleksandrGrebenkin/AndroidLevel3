@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/history_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -14,7 +14,7 @@
         tools:text="Word" />
 
     <TextView
-        android:id="@+id/meanings"
+        android:id="@+id/history_meanings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"

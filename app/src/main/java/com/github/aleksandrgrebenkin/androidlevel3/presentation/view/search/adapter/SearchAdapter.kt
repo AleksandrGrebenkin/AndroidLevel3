@@ -1,4 +1,4 @@
-package com.github.aleksandrgrebenkin.androidlevel3.presentation.ui.adapter
+package com.github.aleksandrgrebenkin.androidlevel3.presentation.view.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.aleksandrgrebenkin.androidlevel3.databinding.ItemWordBinding
 import com.github.aleksandrgrebenkin.androidlevel3.domain.entity.Word
 
-class MainAdapter(private var data: List<Word>) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class SearchAdapter(
+    private var data: List<Word>,
+    private val onItemClickListener: OnItemClickListener
+) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     fun setData(words: List<Word>) {
         data = words
         notifyDataSetChanged()
@@ -19,7 +22,7 @@ class MainAdapter(private var data: List<Word>) : RecyclerView.Adapter<MainAdapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position], onItemClickListener)
     }
 
     override fun getItemCount() = data.size
@@ -27,11 +30,17 @@ class MainAdapter(private var data: List<Word>) : RecyclerView.Adapter<MainAdapt
     inner class ViewHolder(private val itemBinding: ItemWordBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
-        fun bind(word: Word) {
+        fun bind(word: Word, onItemClickListener: OnItemClickListener) {
             itemBinding.text.text = word.text
             itemBinding.meanings.text =
-                "${word.meanings[0].translation} (${word.meanings[0].partOfSpeechCode})"
+                word.meanings[0].let { "${it.translation} (${it.partOfSpeechCode})" }
+
+            itemView.setOnClickListener { onItemClickListener.onItemClicked(word) }
         }
 
+    }
+
+    interface OnItemClickListener {
+        fun onItemClicked(word: Word)
     }
 }
