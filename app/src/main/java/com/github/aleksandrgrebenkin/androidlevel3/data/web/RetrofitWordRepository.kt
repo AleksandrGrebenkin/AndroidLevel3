@@ -6,12 +6,10 @@ import com.github.aleksandrgrebenkin.androidlevel3.domain.entity.Word
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitWordRepository : WordRepository {
@@ -22,7 +20,7 @@ class RetrofitWordRepository : WordRepository {
         return Retrofit.Builder()
             .baseUrl(skyengUrl)
             .addConverterFactory(GsonConverterFactory.create(createGson()))
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(createOkHttpClient())
             .build()
             .create(SkyengService::class.java)
@@ -46,10 +44,8 @@ class RetrofitWordRepository : WordRepository {
             .build()
     }
 
-    override fun search(word: String): Single<List<Word>> {
-        return getService().search(word)
-            .map { convertWords(it) }
-            .subscribeOn(Schedulers.io())
+    override suspend fun search(word: String): List<Word> {
+        return convertWords(getService().searchAsync(word).await())
     }
 
     private fun convertWords(apiWords: List<com.github.aleksandrgrebenkin.androidlevel3.data.web.entity.Word>): List<Word> {

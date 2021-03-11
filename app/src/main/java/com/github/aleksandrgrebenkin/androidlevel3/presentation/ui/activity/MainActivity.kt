@@ -3,39 +3,32 @@ package com.github.aleksandrgrebenkin.androidlevel3.presentation.ui.activity
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.aleksandrgrebenkin.androidlevel3.R
 import com.github.aleksandrgrebenkin.androidlevel3.databinding.ActivityMainBinding
 import com.github.aleksandrgrebenkin.androidlevel3.domain.entity.Word
-import com.github.aleksandrgrebenkin.androidlevel3.presentation.App
 import com.github.aleksandrgrebenkin.androidlevel3.presentation.ui.adapter.MainAdapter
 import com.github.aleksandrgrebenkin.androidlevel3.presentation.viewmodel.WordViewModel
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private lateinit var wordModel: WordViewModel
+    private val wordModel: WordViewModel by viewModel()
 
     private var adapter: MainAdapter? = null
     private lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.component.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        wordModel = viewModelFactory.create(WordViewModel::class.java)
         wordModel.subscribeWordList().observe(this, { showList(it) })
         wordModel.subscribeWordError().observe(this, { showError(it) })
     }
@@ -51,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showError(error: String) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        Log.e("MAIN_ACTIVITY_ERROR", error)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
