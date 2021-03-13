@@ -1,15 +1,13 @@
 package com.github.aleksandrgrebenkin.androidlevel3.di
 
 import androidx.room.Room
-import com.github.aleksandrgrebenkin.androidlevel3.data.repository.WordRepository
-import com.github.aleksandrgrebenkin.androidlevel3.data.repository.WordRepositoryLocal
-import com.github.aleksandrgrebenkin.androidlevel3.data.room.RoomWordRepositoryLocal
-import com.github.aleksandrgrebenkin.androidlevel3.data.room.WordDatabase
-import com.github.aleksandrgrebenkin.androidlevel3.data.web.RetrofitWordRepository
-import com.github.aleksandrgrebenkin.androidlevel3.domain.interactor.HistoryInteractor
-import com.github.aleksandrgrebenkin.androidlevel3.domain.interactor.WordInteractor
-import com.github.aleksandrgrebenkin.androidlevel3.presentation.view.history.HistoryViewModel
-import com.github.aleksandrgrebenkin.androidlevel3.presentation.view.search.SearchViewModel
+import com.github.aleksandrgrebenkin.core.viewmodel.HistoryViewModel
+import com.github.aleksandrgrebenkin.core.viewmodel.SearchViewModel
+import com.github.aleksandrgrebenkin.repository.contract.WordRepository
+import com.github.aleksandrgrebenkin.repository.contract.WordRepositoryLocal
+import com.github.aleksandrgrebenkin.repository.room.RoomWordRepositoryLocal
+import com.github.aleksandrgrebenkin.repository.room.WordDatabase
+import com.github.aleksandrgrebenkin.repository.web.RetrofitWordRepository
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -21,11 +19,11 @@ val application = module {
 }
 
 val searchScreen = module {
-    factory { WordInteractor(get()) }
+    factory { com.github.aleksandrgrebenkin.core.domain.interactor.WordInteractor(get()) }
     viewModel { SearchViewModel(get()) }
 }
 
 val historyScreen = module {
-    factory { HistoryInteractor(get()) }
+    factory { com.github.aleksandrgrebenkin.core.domain.interactor.HistoryInteractor(get()) }
     viewModel { HistoryViewModel(get()) }
 }

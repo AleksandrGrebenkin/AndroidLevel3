@@ -1,0 +1,32 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+dependencies {
+    implementation project(Modules.repository)
+    api project(Modules.model)
+    api project(Modules.navigation)
+
+    //Kotlin
+    implementation Kotlin.stdlib
+    implementation Kotlin.core
+    implementation Kotlin.coroutines_core
+    implementation Kotlin.coroutines_android
+
+    implementation Navigation.fragment
+    implementation Navigation.ui
+
+    //Design
+    implementation Design.appcompat
+    implementation Design.material
+    implementation Design.constraint_layout
+
+    //Lifecycle
+    implementation Lifecycle.extensions
+    implementation Lifecycle.common
+
+    testImplementation TestImpl.junit
+    androidTestImplementation TestImpl.android_junit
+    androidTestImplementation TestImpl.android_espresso
+}

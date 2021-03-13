@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidLevel3</string>
+    <string name="history">History</string>
+    <string name="translate_image_description">translate image</string>
+</resources>

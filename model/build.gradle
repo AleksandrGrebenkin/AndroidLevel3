@@ -1,0 +1,15 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+}
+
+dependencies {
+
+    implementation Kotlin.stdlib
+    implementation Kotlin.core
+
+    testImplementation TestImpl.junit
+    androidTestImplementation TestImpl.android_junit
+    androidTestImplementation TestImpl.android_espresso
+}

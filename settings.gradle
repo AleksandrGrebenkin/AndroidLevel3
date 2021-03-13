@@ -1,2 +1,9 @@
+include ':navigation'
+include ':historyScreen'
+include ':searchScreen'
+include ':core'
+include ':meaningScreen'
+include ':repository'
+include ':model'
 include ':app'
 rootProject.name = "AndroidLevel3"
