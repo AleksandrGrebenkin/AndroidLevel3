@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="translate_image_description">translate image</string>
+</resources>

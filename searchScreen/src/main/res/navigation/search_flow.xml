@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/search_flow"
+    app:startDestination="@id/searchFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.github.aleksandrgrebenkin.searchscreen.view.SearchFragment">
+        <action
+            android:id="@+id/action_searchFragment_to_historyFragment"
+            app:destination="@id/history_flow"
+            app:popUpTo="@id/searchFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_meaningFragment"
+            app:destination="@id/meaningFragment"
+            app:popUpTo="@id/searchFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/meaningFragment"
+        android:name="com.github.aleksandrgrebenkin.meaningscreen.view.MeaningFragment"
+        android:label="fragment_meaning"
+        tools:layout="@layout/fragment_meaning" >
+        <argument
+            android:name="word"
+            app:argType="com.github.aleksandrgrebenkin.model.entity.Word" />
+    </fragment>
+
+
+</navigation>

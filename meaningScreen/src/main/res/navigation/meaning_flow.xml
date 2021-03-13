@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/meaning_flow"
+    app:startDestination="@id/meaningFragment">
+
+    <fragment
+        android:id="@+id/meaningFragment"
+        android:name="com.github.aleksandrgrebenkin.meaningscreen.view.MeaningFragment">
+        <argument
+            android:name="word"
+            app:argType="com.github.aleksandrgrebenkin.model.entity.Word" />
+    </fragment>
+</navigation>
